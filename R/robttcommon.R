@@ -230,10 +230,13 @@
   }
   
   # Remove rows with invalid values (NA, NaN, Inf, -Inf) in dependent variable
-  # is.finite() returns FALSE for all of these cases
-  dep_var <- options[["dependent"]]
+  # (is.finite() returns FALSE for all of these cases) and rows with no group
+  dep_var   <- options[["dependent"]]
+  group_var <- options[["group"]]
   if (dep_var != "" && dep_var %in% names(dataset)) {
     valid_rows <- is.finite(dataset[[dep_var]])
+    if (group_var != "" && group_var %in% names(dataset))
+      valid_rows <- valid_rows & !is.na(dataset[[group_var]])
     n_removed  <- sum(!valid_rows)
     
     if (n_removed > 0) {
