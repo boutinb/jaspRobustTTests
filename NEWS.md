@@ -16,7 +16,8 @@
 
 # jaspRobustTTests (development version)
 
-
+## Fixed
+* Rows with a dependent variable value but no group no longer stop the analyses; they are left out and counted in the note about removed observations ([Issue #4721](https://github.com/jasp-stats/jasp-issues/issues/4721)).
 
 ---
 
